@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculo de moda mediana y media</title>
+</head>
+
+<body>
+  <!-- 
+      Estilo de la página
+     -->
+  <style>
+    form {
+      background: rgba(255, 255, 255, 0.25);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      width: 50%;
+      margin: 0 auto;
+      font-size: 20px;
+      text-align: center;
+    }
+
+    P {
+      font-family: "Courier New", Courier, monospace;
+    }
+
+    input {
+      margin-left: 10px;
+    }
+
+    input[type="button"] {
+      background: rgba(0, 124, 255, 0.25);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      margin-bottom: 12px;
+      margin-top: 12px;
+      font-size: 20px;
+    }
+
+    input[type="button"]:hover {
+      background: rgba(0, 90, 176, 0.25);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      margin-bottom: 12px;
+      margin-top: 12px;
+      font-size: 20px;
+    }
+
+    #media {
+      position: absolute;
+      font-size: 75px;
+      margin-left: 20%;
+      color: red;
+    }
+
+    #moda {
+      position: absolute;
+      font-size: 75px;
+      margin-left: 50%;
+      color: red;
+    }
+
+    #mediana {
+      position: absolute;
+      font-size: 75px;
+      margin-left: 80%;
+      color: red;
+    }
+  </style>
+
+  <body>
+    <form>
+      <p>Primer Número:</p>
+      <input type="number" id="t1" class="numero" />
+      <p>Segundo Número:</p>
+      <input type="number" id="t2" class="numero" />
+      <p>Tercer Número:</p>
+      <input type="number" id="t3" class="numero" />
+      <p>Cuarto Número:</p>
+      <input type="number" id="t4" class="numero" />
+      <p>Quinto Número:</p>
+      <input type="number" id="t5" class="numero" />
+      <p>Sexto Número:</p>
+      <input type="number" id="t6" class="numero" />
+      <p>Séptimo Número:</p>
+      <input type="number" id="t7" class="numero" />
+      <p>Octavo Número:</p>
+      <input type="number" id="t8" class="numero" />
+      <p>Noveno Número:</p>
+      <input type="number" id="t9" class="numero" />
+      <p>Décimo Número:</p>
+      <input type="number" id="t10" class="numero" />
+      <br />
+      <br />
+      <input type="button" value="Calcular media" onclick="Media(),Validar();" />
+      <input type="button" value="Calcular moda" onclick="Moda(),Validar();" />
+      <input type="button" value="Calcular mediana" onclick="Mediana(),Validar();" />
+    </form>
+
+    <p id="media"></p>
+    <p id="moda"></p>
+    <p id="mediana"></p>
+    <script>
+      var Media = function () {
+        //Calculo de la media
+        var entrada = document.getElementsByClassName("numero");
+        var arrayGuardar = [];
+        var suma = 0;
+        for (var i = 0; i < entrada.length; i++) {
+          arrayGuardar[i] = parseInt(entrada[i].value);
+        }
+
+        for (var f = 0; f < arrayGuardar.length; f++) {
+          suma += arrayGuardar[f];
+        }
+
+        var media = parseInt(suma) / arrayGuardar.length;
+        if (isNaN(media)) {
+          alert("No se puede calcular")
+        } else {
+          document.getElementById("media").innerHTML = media;
+          console.log(
+            "%cLa media es " + media + "",
+            "color: red; font: 20px Arial, sans-serif;"
+          );
+        }
+      };
+
+      var Moda = function () {
+        //Calculo de la moda de un array
+        let entrada = document.getElementsByClassName("numero");
+
+
+        var arrayGuardar = [];
+        for (var i = 0; i < entrada.length; i++) {
+          arrayGuardar[i] = entrada[i].value;
+        }
+        const ordenado = arrayGuardar.sort(function (a, b) {
+          return a - b
+        });
+        const toNumbers = (arr) => arr.map(Number);
+
+        function calcularModa(valores) {
+
+          var [repeticiones, modaarr] = valores.reduce(
+            (acc, val) => {
+              const nn = contar(valores, val);
+              if (nn === acc[0] && acc[1].every((item) => item !== val)) {
+                acc[1].push(val);
+              } else if (nn > acc[0]) {
+                acc = [nn, [val]];
+              }
+              return acc;
+            },
+            [0, []]
+          );
+          var modadef = toNumbers(modaarr); //lo paso a numeros
+          var modastr = modadef.toString(); // lo paso a string
+
+          document.getElementById("moda").innerHTML = modastr.replace(/,/g, " y ");
+          console.log(
+            "%cLa moda es " + modastr.replace(/,/g, " y ") + "",
+            "color: red; font: 20px Arial, sans-serif;"
+          );
+
+          return {
+            repeticiones,
+            modaarr
+          };
+        }
+
+        function contar(arrayElmentos, valorAContar) {
+          return arrayElmentos.filter((elemento) => elemento === valorAContar).length;
+        }
+        console.log(calcularModa(ordenado));
+      };
+
+      var Mediana = function () {
+        let entrada = document.getElementsByClassName("numero"),
+          arrayGuardar = [];
+        for (var i = 0; i < entrada.length; i++) {
+          arrayGuardar[i] = entrada[i].value;
+        }
+        //Calculo de la mediana de un array
+        var mediana = 0;
+        const ordenado = arrayGuardar.sort(function (a, b) {
+          return a - b
+        });
+        var result = parseInt(ordenado[4]) + parseInt(ordenado[5]);
+        mediana = result / 2;
+
+        if (isNaN(mediana)) {
+          alert("No se puede calcular")
+        } else {
+          document.getElementById("mediana").innerHTML = mediana;
+          console.log(
+            "%cLa mediana es " + mediana + "",
+            "color: red; font: 20px Arial, sans-serif;"
+          );
+        }
+
+      };
+
+      var Validar = function () {
+        let entrada = document.getElementsByClassName("numero");
+        for (var i = 0; i < entrada.length; i++) {
+          // Validacion de la entrada de datos
+          //Comprueba si el valor de entrada es mayor que 100 o menor que 0
+          if (entrada[i].value > 100 || entrada[i].value < 0) {
+            alert(
+              "El número introducido en la casilla " + (i + 1) + " no es válido"
+            );
+          }
+        }
+      };
+
+      function load() {
+        console.log(
+          "%cHecho por: Rodrigo Sendino Sanz",
+          "color: orange; font: 15px Arial, sans-serif;"
+        );
+      }
+      window.onload = load;
+    </script>
+  </body>
+
+</html>
