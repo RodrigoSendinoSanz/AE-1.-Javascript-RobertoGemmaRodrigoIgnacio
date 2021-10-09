@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>AE-1. Javascript</title>
+	
+
+	</head>
+<body>
+	<style>
+        body {
+            background-color: #36404f;
+        }
+
+		h1{
+			color:azure;
+			text-align: center;
+		}
+
+        h2 {
+            color: azure;
+            text-align: center;
+        }
+
+		p{
+			color: azure;
+		}
+        form {
+            text-align: center;
+        }
+	</style>
+	<h1> CALCULADOR DE NÚMEROS</h1>
+	
+	<fieldset>
+
+
+		<h2>Introduce 10 números</h2>
+		<form>
+			<p></p><input type:"number" id="numero1" placeholder="Numero 1"></p>
+			<p></p><input type:"number" id="numero2" placeholder="Numero 2"></p>
+			<p></p><input type:"number" id="numero3" placeholder="Numero 3"></p>
+			<p></p><input type:"number" id="numero4" placeholder="Numero 4"></p>
+			<p></p><input type:"number" id="numero5" placeholder="Numero 5"></p>
+			<p></p><input type:"number" id="numero6" placeholder="Numero 6"></p>
+			<p></p><input type:"number" id="numero7" placeholder="Numero 7"></p>
+			<p></p><input type:"number" id="numero8" placeholder="Numero 8"></p>
+			<p></p><input type:"number" id="numero9" placeholder="Numero 9"></p>
+			<p></p><input type:"number" id="numero10" placeholder="Numero 10"></p>
+
+			<button type="button" onclick="mediaArray()">Mostrar media</button>
+			<button type="button" onclick="medianaArray()">Mostrar mediana</button>
+			<button type="button" onclick="mode()">Mostrar moda</button>
+			<p id="media"></p>  <p id="mediana"></p> <p id="moda"></p>
+		</form>
+		
+		<!--Mostrar Array
+		<script>
+
+			function mostrarArray() {
+				var array = [];
+				for (var i = 0; i < 10; i++) {
+					array[i] = parseFloat(document.getElementById("numero" + (i + 1)).value);
+				}
+				var arrayAlmacenado = [];
+				for (var i = 0; i < 10; i++) {
+					if (array[i] <= 100) {
+						arrayAlmacenado[i] = array[i];
+
+					}
+
+
+
+				}
+				for (var i = 0; i < arrayAlmacenado.length; i++) {
+
+					console.log(arrayAlmacenado[i]);
+
+				}
+
+			}
+
+
+		</script>
+		-->
+
+		<!----Calcular la media -->
+		<script>
+
+			function mediaArray() {
+				var array = [];
+				var suma = 0
+				var sumaTotal = 0
+				var media = 0
+				var contador = 0
+				for (var i = 0; i < 10; i++) {
+					array[i] = parseFloat(document.getElementById("numero" + (i + 1)).value);
+				}
+
+				//Usando un bucle For y un condicional If con dos condiciones le decimos que solo use numeros entre 0 y 100
+				for (var i = 0; i < array.length; i++) {
+					if ((array[i] <= 100) && (array[i] > 0)) {
+						suma = suma + array[i]
+						contador = contador + 1
+					}
+					else {
+						sumaTotal = sumaTotal + array[i]
+					}
+
+
+				}
+				media = suma / contador;
+				console.log("La suma de los numeros entre 0 y 100 es: " + suma);
+				console.log("La suma total de los numeros mayores de 100 es: " + sumaTotal);
+				console.log("La media es:" + media);
+				console.log("Numeros a contar: " + contador);
+                document.getElementById("media").innerHTML = "La media es: " + media;
+			}
+		</script>
+
+		<!----Calcular la mediana -->
+
+		<script>
+
+			function medianaArray() {
+
+				var array = [];
+
+				for (var i = 0; i < 10; i++) {
+					array[i] = parseFloat(document.getElementById("numero" + (i + 1)).value);
+
+					//Ordenamos el array en orden ascendente
+					for (var j = 0; j < array.length; j++) {
+						if (array[j] > array[i]) {
+							aux = array[i]
+							array[i] = array[j]
+							array[j] = aux
+						}
+					}
+
+					//Aplicamos un condicional if para sacar la mediana
+					if (array.length % 2 == 0) {
+						var pos1 = array.length / 2
+						var pos2 = pos1 - 1
+						var elem1 = array[pos1]
+						var elem2 = array[pos2]
+						var mediana = (elem1 + elem2) / 2
+					} else {
+						var pos_central = (array.length - 1) / 2
+						var mediana = array[pos_central]
+					}
+				}
+                document.getElementById("mediana").innerHTML = "La mediana es: " + mediana;
+				console.log("Mediana es:  " + mediana)
+				console.log("Numero 1:  " + array[0])
+				console.log("Numero 2:  " + array[1])
+				console.log("Numero 3:  " + array[2])
+				console.log("Numero 4:  " + array[3])
+				console.log("Numero 5:  " + array[4])
+				console.log("Numero 6:  " + array[5])
+				console.log("Numero 7:  " + array[6])
+				console.log("Numero 8:  " + array[7])
+				console.log("Numero 9:  " + array[8])
+				console.log("Numero 10:  " + array[9])
+			}
+		</script>
+
+		<!----Calcular la moda -->
+
+		<script>
+
+
+            
+
+			
+			function mode() {
+
+                var array = [];
+				for (var i = 0; i < 10; i++) {
+					array[i] = parseFloat(document.getElementById("numero" + (i + 1)).value);
+				}
+             
+                return array.sort((a, b) =>
+                    array.filter(v => v === a).length
+                    - array.filter(v => v === b).length
+				).pop();
+
+				 console.log(mode()); //5
+            document.getElementById("moda").innerHTML = "La mediana es: OPCION NO DISPONIBLE" ;
+            }
+
+
+           
+
+
+
+		</script>
+
+	</fieldset>
+</body>
+
+</html>
