@@ -14,9 +14,9 @@ console.log(b);
 console.log("------MEDIA--------");
 console.log(b / cantN);//hace la media de la suma de los numeros dividiendolo entre la cantidad de numeros que generamos
 
-numeros = listaNumeros.sort((x, y) => x - y);//ordena toda la lista de los numeros
-let mitad = Math.floor(numeros.length / 2);//sacamos la mitad del array redondeando hacia abajo
-mediana = numeros.length % 2 == 1 ? numeros[mitad] : (numeros[mitad - 1] + numeros[mitad + 2])/ 2;
+numero = listaNumeros.sort((x, y) => x - y);//ordena toda la lista de los numeros
+let mitad = Math.floor(numero.length / 2);//sacamos la mitad del array redondeando hacia abajo
+mediana = numero.length % 2 == 1 ? numero[mitad] : (numero[mitad - 1] + numero[mitad + 2])/ 2;
 //numeros.length % 2 == 1 esto comprueba si la longitud del array es impar
 // de ser asi solo optiene como resultado numeros[mitad]
 //si no fuera impar optenemos el resultado de (numeros[mitad - 1] + numeros[mitad + 2])/ 2
