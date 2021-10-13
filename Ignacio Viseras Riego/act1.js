@@ -33,7 +33,7 @@ let conteo = [];
 
 
 for(let i = 1; i <= listaNumeros.length;i++){//iniciamos el bucle pero i esta en 1 ya que la pos de x empezaba en 0
-        if(x == listaNumeros[i]){//aqui se comprueba si es igual la posicion en la que esta x con la poscion en la q estara i
+        if(x == listaNumeros[i]){//aqui se comprueba si es igual el valor en el que esta x con el valor en el q estara i
                 cuenta = cuenta + 1;//de ser asi se contara el numero que se repite
         }else{//de no ser igual entrara y 
                 numeros.push(x);//guardara el numero que tenia x
