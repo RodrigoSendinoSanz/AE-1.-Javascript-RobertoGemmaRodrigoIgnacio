@@ -24,7 +24,7 @@ mediana = numeros.length % 2 == 1 ? numeros[mitad] : (numeros[mitad - 1] + numer
 console.log("-----MEDIANA------");
 console.log(mediana)
 
-//https://www.youtube.com/watch?v=-G-vp4Kvgg8&ab_channel=Pruebastécnicasdev
+
 listaNumeros.sort();//ponemos la lista en orden ascendente
 let cuenta = 1
 let x = listaNumeros[0];//le damos a x la posicion 0 del array de la lista de numeros
