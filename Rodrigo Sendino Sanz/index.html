@@ -104,9 +104,9 @@
       <input type="number" id="t10" class="numero" />
       <br />
       <br />
-      <input type="button" value="Calcular media" onclick="Media(),Validar();" />
-      <input type="button" value="Calcular moda" onclick="Moda(),Validar();" />
-      <input type="button" value="Calcular mediana" onclick="Mediana(),Validar();" />
+      <input type="button" value="Calcular media" onclick="Validar(),Media();" />
+      <input type="button" value="Calcular moda" onclick="Validar(),Moda();" />
+      <input type="button" value="Calcular mediana" onclick="Validar(),Mediana();" />
     </form>
 
     <p id="media"></p>
@@ -222,6 +222,7 @@
             alert(
               "El número introducido en la casilla " + (i + 1) + " no es válido"
             );
+            
           }
         }
       };
